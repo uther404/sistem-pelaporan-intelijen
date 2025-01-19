@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# Sistem Pelaporan Intelijen
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sistem Pelaporan Intelijen adalah aplikasi berbasis web yang dirancang untuk mempermudah pelaporan, pengelolaan, dan evaluasi laporan oleh anggota maupun pemimpin tim.
 
-## Available Scripts
+## Fitur Utama
 
-In the project directory, you can run:
+### **1. Autentikasi**
+- **Login:** Pengguna dapat login menggunakan NRP dan password.
+- **Register:** Anggota baru dapat mendaftar dengan nama, NRP, dan password.
+- **Role-based Access:**
+  - **Pemimpin:** Memiliki akses ke fitur khusus seperti melihat semua laporan anggota.
+  - (jumlah akun pemimpin di batasi)
+  - **Anggota:** Hanya memiliki akses untuk membuat laporan.
 
-### `npm start`
+### **2. Laporan**
+- **Membuat Laporan:**
+  - Anggota dapat membuat laporan dengan judul, deskripsi, dan dokumentasi (gambar).
+- **Melihat Laporan:**
+  - Pemimpin dapat melihat laporan anggota.
+- **Edit Laporan:**
+  - Pemimpin dapat mengedit laporan yang sudah dibuat.
+- **Salin ke Clipboard:**
+  - Memungkinkan laporan disalin dalam format rapi untuk dikirim ke platform lain seperti WhatsApp.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **3. Dokumentasi**
+- **Unggah Dokumentasi:**
+  - Pengguna dapat mengunggah gambar terkait laporan.
+- **Pengelolaan Dokumentasi:**
+  - Gambar yang diunggah tersimpan di Backendless dan dapat diperbarui sesuai kebutuhan.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **4. Dashboard**
+- **Ringkasan Status:**
+  - Menampilkan jumlah laporan pada database
+- **Laporan Terbaru:**
+  - Pemimpin dapat melihat laporan yang baru di upload.
 
-### `npm test`
+## Teknologi yang Digunakan
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frontend:**
+  - Javascript
+  - React.js
+  - CSS Modules
+  - netlify
+- **Backend:**
+  - Backendless (untuk database, autentikasi, dan file storage)
+- **Tools:**
+  - React Router DOM untuk navigasi
+  - Toastify untuk notifikasi
 
-### `npm run build`
+## Struktur Folder
+```
+.
+├── public
+├── src
+│   ├── assets
+│   |   ├── logo.png
+│   ├── components
+│   │   ├── Header.js
+│   │   ├── Header.module.css
+│   │   ├── Footer.js
+│   ├── pages
+│   │   ├── Dashboard.js
+│   │   ├── Dashboard.module.css
+│   │   ├── Login.js
+│   │   ├── Login.module.css
+│   │   ├── Register.js
+│   │   ├── Register.module.css
+│   │   ├── ReportForm.js
+│   │   ├── ReportForm.module.css
+│   │   ├── ReportDetails.js
+│   │   ├── ReportDetails.module.css
+│   │   ├── LeaderTools.js
+│   │   ├── LeaderTools.module.css
+│   ├── services
+│   │   ├── backendless.js
+│   │   ├── reportService.js
+│   ├── utils
+│   │   ├── constants.js
+│   │   ├── validate.js
+│   │   ├── toast.js
+│   ├── App.js
+│   ├── index.js
+├── README.md
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Cara Menjalankan Aplikasi
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/username/sistem-pelaporan-intelijen.git
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Masuk ke Direktori Proyek**
+   ```bash
+   cd sistem-pelaporan-intelijen
+   ```
 
-### `npm run eject`
+3. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Jalankan Aplikasi**
+   ```bash
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. **Akses Aplikasi di Browser**
+   Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Pengaturan Backendless
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Login ke Backendless**
+   - Buat akun di [Backendless](https://backendless.com/) jika belum memiliki.
 
-## Learn More
+2. **Buat Aplikasi Baru**
+   - Buat aplikasi baru di dashboard Backendless.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Konfigurasi Database**
+   - Buat tabel dengan nama `Laporan` dan tambahkan kolom berikut:
+     - `judul` (string)
+     - `deskripsi` (text)
+     - `dokumentasi` (string untuk URL gambar)
+     - `status` (string)
+     - `created` (datetime)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. **Update File backendless.js**
+   - Masukkan **App ID** dan **REST API Key** Anda:
+     ```javascript
+     const Backendless = require('backendless');
 
-### Code Splitting
+     Backendless.initApp('YOUR_APP_ID', 'YOUR_REST_API_KEY');
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+     export default Backendless;
+     ```
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Catatan Tambahan
+- Pastikan file gambar yang diunggah tidak melebihi batas ukuran yang ditentukan oleh Backendless.
+- Fitur edit laporan hanya tersedia untuk laporan yang dibuat oleh pengguna terkait.
+- Gunakan Toastify untuk memberikan notifikasi interaktif kepada pengguna.
