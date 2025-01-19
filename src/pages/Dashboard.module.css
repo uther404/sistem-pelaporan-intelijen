@@ -1,0 +1,56 @@
+.container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.summary {
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.status {
+    margin-top: 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 5px 0;
+}
+
+.recentReports {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.recentReports ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.recentReports ul li:last-child {
+    border-bottom: none;
+}
+
+strong {
+    color: #000000;
+}
